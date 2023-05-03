@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    
+    <title>
+        {% if title %}
+            Books Rating - {{ title }}
+        {% else %}
+            Books Rating
+        {% endif %}
+
+
+    </title>
+  
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='static/page1.css'>
+    <!-- <script src='page1.js'></script> -->
+</head>
+<body>
+    <div id="wrapper">
+        
+        <div id="header">
+            <h1>Search Your Favourite Books </h1>
+        </div>
+        <div id="menu">
+        <div id="menu2" style="font-weight:bold">
+            {% if image_path %}
+            <img src="{{ image_path }}" style="width: 70px;height:70px;" id="profile-pic" name="image"/>
+          {% else %}
+            <img src="{{ url_for('static', filename='images/profile2.jpg') }}" style="width: 70px;height:70px;" id="profile-pic" name="image"/>
+          {% endif %}
+            
+            {% if fname %}
+            {{fname}}
+            {% endif %}
+            {% if uid %}
+            <input type="hidden"  value="{{uid}}">
+            {% endif %}
+        </div>
+            
+            <ul style="font-weight:bold;">
+                
+                <li><a href="">User Account</a></li>
+                <li><a href="">Update Rating</a></li>
+                <li><a href="">Update Comment</a></li>
+                <li><a href="">Delete Rating</a></li>
+               
+                
+                
+            
+            </ul>
+        <form id="search-form" method="POST" action="{{url_for('search')}}" >
+
+            <div class="search-container">
+                <select name="search-category">
+                    <option value="book-title">Book Title</option>
+                    <option value="genre">Genre</option>
+                    <option value="author">Author</option>
+                </select>
+                <input type="text" placeholder="Search..." name="search-term">
+                
+                <button type="submit" id="search-btn">Search<i class="fa fa-search"></i></button>
+            
+                
+            </div>
+        </form>
+            
+        </div>
+        <div id="content">
+            <div class="modal hidden position-modal">
+                
+                <button class="close-modal" >&times;</button>
+          
+                <form id="register" name="form" method="post" action="{{url_for('changepassword1')}}">
+                  <label>Old Password :</label>
+          
+                  <br />
+                  <input type="password"
+                    name="password_old"
+                    id="password1"
+                    placeholder="Enter Your Old Password"
+                  />
+          
+                  <br /><br />
+                  <label>New Password :</label><br /><input
+                    type="password"
+                    id="password2"
+                    placeholder="Enter your New Password"
+                    name="password_new"
+                    required
+                  /><br /><br />
+                  <label>Confirm New Password :</label><br /><input
+                    type="password"
+                    id="password3"
+                    placeholder="Confirm New Password"
+                    name="confirm-password"
+                    required
+                  /><br />
+                  {% if message %}
+                  <label style="font-weight: bold; font-size: 15px; color: red"
+                    >{{message}}</label
+                  >
+                  {% endif %}
+                  <br />
+                  <input type="submit" value="Submit" name="submit" id="submit" />
+                  <br /><br />
+                </form>
+              </div>
+              
+
+            <article class="contentsection">
+                <div class="media-body">
+                    <div class="article-metadata">
+       
+                        <table width="100%">
+                            {% for book in var_books1 %}
+                            <tr>
+                                <td>
+                                    A <a class="article-title" href="{{ url_for('genre',getgenre=book['Genre'])}}">{{book['Genre']}}</a> Book by 
+                                    <a class="text-muted" href="{{url_for('author',getauthor=book['Author'])}}">{{book['Author']}}</a>
+                                    </div>
+                                    <h2></a><a class="mr-2" href="{{url_for('book',getbook=book['Title'])}}">{{book['Title']}}</a></h2>
+                                    <p class="article-content">Average Rating:{{book.Rating}} No Ratings yet</p>
+                                </td>
+                                <td>
+                                    <img class="img" src="/static/images/{{ book['Image'] }}" align="right"/>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+            
+            </div>
+
+            
+            </article>
+            
+        </div>
+        
+        
+        <div id="sidebar">
+            <ul>
+                <li><a href="">Login</a></li>
+                <li><a href="">Register</a></li>
+                <li><a href="">Delete Account</a></li>
+                <li><a href="{{url_for('logout')}}">Logout</a></li>
+                <li><a href="{{url_for('changepassword')}}">Change Password</a></li>
+                <li><a onclick=openModal() href="{{url_for('changepassword1')}}">Change Password2</a></li>
+
+            </ul>
+        
+        
+        
+        </div>
+        
+        <div id="footer">
+            @2023 copyright
+        
+        </div>
+    </div>
+    <script src="/static/js/changepassword.js"></script>
+    <script src="/static/js/search.js"></script>
+    <script src="/static/js/profile_pic.js"></script>
+    
+    
+</body>
+
+
+</html>

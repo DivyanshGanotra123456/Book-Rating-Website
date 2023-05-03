@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    
+    <title>
+        {% if title %}
+            Books Rating - {{ title }}
+        {% else %}
+            Books Rating
+        {% endif %}
+
+
+    </title>
+  
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='../static/page1.css'>
+    <!-- <script src='page1.js'></script> -->
+</head>
+<body>
+    <div id="wrapper">
+        
+        <div id="header">
+
+            <h1>{{var_books1[0]['Genre']}} </h1>
+        </div>
+        <div id="menu">
+            
+         
+            <ul style="font-weight:bold;">
+                <li><a href="">User Account</a></li>
+                <li><a href="">Update Rating</a></li>
+                <li><a href="">Update Comment</a></li>
+                <li><a href="">Delete Rating</a></li>
+                <p style="color:black ;margin-top:10px;float:right;">{{fname}}</p>
+                
+                
+            
+            </ul>
+        </div>
+        <div id="content">
+            <article class="contentsection">
+                <div class="media-body">
+                    <div class="article-metadata">
+       
+                        <table width="100%">
+                            {% for book in var_books1 %}
+                            <tr>
+                                <td>
+                                    A <a class="article-title" href="{{ url_for('genre',getgenre=book['Genre'])}}">{{book['Genre']}}</a> Book by 
+                                    <a class="text-muted" href="{{url_for('author',getauthor=book['Author'])}}">{{book['Author']}}</a>
+                                    </div>
+                                    <h2></a><a class="mr-2" href="{{url_for('book',getbook=book['Title'])}}">{{book['Title']}}</a></h2>
+                                    <p class="article-content">Average Rating:{{book.Rating}} No Ratings yet</p>
+                                </td>
+                                <td>
+                                    <img class="img" src="../static/images/{{ book['Image'] }}" align="right">
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+            
+            
+            
+            </article>
+        </div>
+        
+        
+        <div id="sidebar">
+            <ul>
+                <li><a href="">Login</a></li>
+                <li><a href="">Register</a></li>
+                <li><a href="">Delete Account</a></li>
+                <li><a href="{{url_for('logout')}}">Logout</a></li>
+                <li><a href="{{url_for('changePassword')}}">Change Password</a></li>
+            </ul>
+        
+        
+        
+        </div>
+        
+        <div id="footer">
+            @2023 copyright
+        
+        </div>
+    </div>
+
+        
+    
+</body>
+
+</html>

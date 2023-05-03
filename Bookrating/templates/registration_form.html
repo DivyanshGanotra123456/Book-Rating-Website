@@ -1,0 +1,238 @@
+<html>
+  <head>
+    <title>Registration Form</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        background: url("static/images/books.jpg");
+        background-size: 100%;
+
+        background-size: 100%;
+
+        width: 100%;
+        height: 100vh;
+        overflow: hidden;
+      }
+      div.main {
+        width: 400px;
+        margin: 100px auto 0px auto;
+      }
+      h2 {
+        text-align: center;
+        padding: 20px;
+        font-family: sans-serif;
+      }
+      #login_message {
+        width: 100%;
+        background-color: rgba(57, 255, 20, 0.7);
+        padding: 10px;
+        display: none;
+      }
+      div.register {
+        background-color: rgba(0, 0, 0, 0.5);
+        width: 100%;
+        font-size: 18px;
+        border-radius: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.3);
+        color: #fff;
+      }
+      form#register {
+        margin: 40px;
+      }
+      label {
+        font-family: sans-serif;
+        font-size: 18px;
+        font-style: italic;
+      }
+      input#name {
+        width: 300px;
+        border: 1px solid #ddd;
+        border-radius: 3px;
+        outline: 0;
+        padding: 7px;
+        background-color: #fff;
+        box-shadow: inset 1px 1px 5px;
+      }
+      input#email {
+        width: 300px;
+        border: 1px solid #ddd;
+        border-radius: 3px;
+        outline: 0;
+        padding: 7px;
+        background-color: #fff;
+        box-shadow: inset 1px 1px 5px;
+      }
+      input#password1 {
+        width: 300px;
+        border: 1px solid #ddd;
+        border-radius: 3px;
+        outline: 0;
+        padding: 7px;
+        background-color: #fff;
+        box-shadow: inset 1px 1px 5px;
+      }
+      input#confirm_password {
+        width: 300px;
+        border: 1px solid #ddd;
+        border-radius: 3px;
+        outline: 0;
+        padding: 7px;
+        background-color: #fff;
+        box-shadow: inset 1px 1px 5px;
+      }
+      input#submit {
+        width: 200px;
+        padding: 7px;
+        font-size: 16px;
+        font-family: sans-serif;
+        font-weight: 600;
+        border: none;
+        border-radius: 3px;
+        background-color: rgba(250, 100, 0, 0.8);
+        color: #fff;
+        cursor: pointer;
+        border: 1px solid;
+        box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+        margin-bottom: 20px;
+      }
+      label,
+      span,
+      h2 {
+        text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+      }
+      #inline-paragraph a {
+        display: inline;
+        position: relative;
+        left: 190px;
+        top: -17px;
+        font-weight: bold;
+        color: orange;
+        text-decoration: none;
+      }
+      #inline-paragraph a:hover::after {
+        display: inline;
+        position: relative;
+        left: 190px;
+        top: -17px;
+        font-weight: bold;
+        color: orange;
+        text-decoration: none;
+        transform: scale(2);
+      }
+      .hero {
+        width: 100%;
+        height: 100vh;
+        background: green;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .card {
+        width: 400px;
+        background: black;
+        opacity: 0.7;
+        padding: 40px;
+        border-radius: 15px;
+        text-align: center;
+        color: #333;
+      }
+      .card h1 {
+        font-weight: 500;
+        color: #000;
+      }
+      .card img {
+        width: 90px;
+        height: 90px;
+        border-radius: 50%;
+        margin-top: 40px;
+        margin-bottom: 30px;
+      }
+      img#profile-pic {
+        border-radius: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main">
+      <div id="login_message">
+        <p style="color: red; font-size: 18px; font-weight: bold">
+          Registration Sucessful!!!
+        </p>
+      </div>
+      <div class="register">
+        <h2>New User Registration</h2>
+        <!-- <form id="register" method="post" enctype="multipart/form-data"> -->
+        <form id="register" method="POST" action="/callregisterform" enctype="multipart/form-data">
+          <label>User Name :</label>
+
+          <br />
+          <input
+            type="text"
+            name="fname"
+            id="name"
+            placeholder="Enter your user name"
+          />
+          <br /><br />
+          <label>Email Address :</label>
+          <br />
+          <input
+            type="email"
+            name="email"
+            id="email"
+            class="email"
+            placeholder="Enter your Email address"
+          />
+          <br /><br />
+          <label>Password :</label><br /><input
+            type="password"
+            id="password1"
+            placeholder="Enter your Password"
+            name="password"
+            required
+          /><br /><br />
+          <label>Confirm Password :</label><br /><input
+            type="password"
+            id="confirm_password"
+            placeholder="Confirm Password"
+            name="confirm-password"
+            required
+          /><br /><br />
+          <img
+            src="static/images/profile2.jpg"
+            style="width: 100px"
+            height="100px"
+            id="profile-pic"
+            name="image"
+          />
+          <label for="input-file"></label>
+          <input type="file" accept="image/*" name="file" id="input-file" />
+
+          <!-- <input type="file" id="img" name="file" accept="image/*" > -->
+                    <!-- <img name="image" id="image"  alt="Image Description"> -->
+          <br /><br />
+
+          <input type="submit" value="Submit" name="submit" id="submit" />
+          <br /><br />
+
+          <div id="msg"></div>
+        </form>
+      </div>
+      <div class="paragraph-container" id="inline-paragraph">
+        <p id="left" style="font-weight: bold; color: white">
+          Already have an account ?
+        </p>
+        <div id="inline-paragraph">
+          <a href="/login" id="inline-paragraph">Sign In</a>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
+  <script src="static/js/register.js"></script>
+  <script src="static/js/profile_pic.js"></script>
+</html>

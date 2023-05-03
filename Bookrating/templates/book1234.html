@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>{{Title}}</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      #slideshow {
+        position: relative;
+        width: 100%;
+        min-height: 700px;
+        background-image: url("static/images/books.jpg");
+        background-size: cover;
+        background-position: center;
+      }
+      .container {
+        display: flex;
+        justify-content: flex-end;
+      }
+      #headline {
+        width: 100%;
+        background-color: black;
+        opacity: 0.7;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        text-align: center;
+        font-size: 40px;
+      }
+      #mainimage {
+        width: 40%;
+        background-color: black;
+        opacity: 0.7;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        margin-top: 10px;
+        text-align: center;
+        font-size: 20px;
+        float: right;
+      }
+      #description {
+        border: 1px solid #ddd;
+        border-radius: 3px;
+        outline: 0;
+        padding: 7px;
+        background-color: #fff;
+        box-shadow: inset 1px 1px 5px;
+      }
+      .container2 {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: flex-end;
+      }
+      #average_rating {
+        width: 40%;
+        background-color: black;
+        opacity: 0.7;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        text-align: center;
+        font-size: 20px;
+        margin-top: 10px;
+      }
+      .container3 {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: flex-end;
+      }
+      #author6 {
+        width: 40%;
+        background-color: black;
+        opacity: 0.7;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        text-align: center;
+        font-size: 20px;
+        margin-top: 10px;
+      }
+      #genre6 {
+        width: 40%;
+        background-color: black;
+        opacity: 0.7;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        text-align: center;
+        font-size: 20px;
+        margin-top: 10px;
+      }
+      .container4 {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: flex-end;
+      }
+      .container5 {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: flex-start;
+      }
+      #summ {
+        width: 58%;
+        background-color: black;
+        opacity: 0.7;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        text-align: center;
+        font-size: 30px;
+        margin-top: 10px;
+        position: relative;
+        top: -535px;
+        min-height: 500px;
+      }
+      #write {
+        padding: 10px;
+      }
+      #your_rating {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: flex-end;
+        width: 100%;
+        background-color: black;
+        opacity: 0.7;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        position: relative;
+        top: -520px;
+        font-size: 30px;
+      }
+      .ratinggg {
+        font-size: 35px;
+        display: inline-block;
+        position: relative;
+      }
+      .ratinggg .star {
+        color: gray;
+        cursor: pointer;
+      }
+      .ratinggg:hover .star,
+      .ratinggg:hover .star ~ .star {
+        color: yellow;
+      }
+      #write_comment {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: flex-end;
+        width: 100%;
+        background-color: black;
+
+        padding-bottom: 15px;
+        position: relative;
+        font-size: 30px;
+        top: -510px;
+      }
+      #other_comments_and_ratings {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: flex-end;
+        width: 100%;
+        background-color: black;
+
+        font-size: 30px;
+        min-height: 180px;
+        padding-bottom: 40%;
+        position: relative;
+        top: -450px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="slideshow" name="background-image">
+      <div id="headline" name="headline">
+        <p style="color: white">Darkly Dreaming Dexter</p>
+      </div>
+      <div class="container">
+        <div id="mainimage">
+          <img src="static/images/dexter2.jpg" width="200" />
+        </div>
+      </div>
+      <div class="container2">
+        <div id="average_rating">
+          <p style="color: white">Average Rating:</p>
+        </div>
+      </div>
+      <div class="container3">
+        <div id="author6">
+          <p style="color: white">Author:</p>
+        </div>
+      </div>
+      <div class="container4">
+        <div id="genre6">
+          <p style="color: white">Genre:</p>
+          <p>{{book['Genre']}}</p>
+        </div>
+      </div>
+      <div class="container5">
+        <div id="summ">
+          <p style="color: white; font-size: 35px">Summary</p>
+          <div id="write">
+            <p style="color: white; font-size: 30px">
+                <div class="article-metadata">
+       
+                    <table width="100%">
+                        {% for book in var_books1 %}
+                        <tr>
+                            <td>
+                                A <a class="article-title" href="{{ url_for('genre',getgenre=book['Genre'])}}">{{book['Genre']}}</a> Book by 
+                                <a class="text-muted" href="{{url_for('author',getauthor=book['Author'])}}">{{book['Author']}}</a>
+                                </div>
+                                <h2></a><a class="mr-2" href="{{url_for('book',getbook=book['Title'])}}">{{book['Title']}}</a></h2>
+                                <p class="article-content">Average Rating:{{book.Rating}} No Ratings yet</p>
+                            </td>
+                            <td>
+                                <img class="img" src="static/images/{{ book['Image'] }}" align="right">
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+        
+        </div>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div id="your_rating">
+        <p style="color: white">Your Rating:</p>
+        <div class="ratinggg">
+          <span class="star">&#9733;</span>
+          <span class="star">&#9733;</span>
+          <span class="star">&#9733;</span>
+          <span class="star">&#9733;</span>
+          <span class="star">&#9733;</span>
+          <span class="star">&#9733;</span>
+          <span class="star">&#9733;</span>
+          <span class="star">&#9733;</span>
+          <span class="star">&#9733;</span>
+          <span class="star">&#9733;</span>
+        </div>
+      </div>
+      <div id="write_comment">
+        <p style="color: white">Write Your Comment:</p>
+        <br /><br />
+        <textarea
+          id="description"
+          name="description"
+          placeholder="Write Your Opinion......."
+          rows="10"
+          cols="200"
+        ></textarea>
+      </div>
+      <div id="other_comments_and_ratings">
+        <h style="color: white">No Comments and Ratings Yet......</h>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="static/js/slideshow.js"></script>
+  </body>
+</html>
