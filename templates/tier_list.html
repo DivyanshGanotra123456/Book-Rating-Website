@@ -1,0 +1,187 @@
+<html>
+<head>
+    <title>User Personal Tier List</title>
+    <style>
+        #heading {
+            width: 1200px;
+            padding-left: 0px;
+            padding-right: 0px;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            height: 40px;
+            margin: auto;
+            text-align: center;
+            background-color: crimson;
+        }
+
+        #search {
+            width: 1200px;
+            padding-left: 0;
+            padding-right: 0;
+            height: 10px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            margin: auto;
+            background-color: lightsalmon;
+        }
+
+        #search form {
+            position: relative;
+            left: 950px;
+            top: -5px;
+        }
+
+        #user {
+            background-color: grey;
+        }
+
+        table {
+            border: 2px solid black;
+            margin: auto;
+            min-width: 1200px;
+        }
+
+        td {
+            background-color: rgb(40, 40, 40);
+            color: white;
+            padding: 2.5em;
+            font-size: 150%;
+        }
+
+        #five {
+            background-color: rgb(183, 0, 255);
+            width: 10px;
+        }
+
+        #four {
+            background-color: rgb(0, 150, 0);
+            width: 10px;
+        }
+
+        #three {
+            background-color: rgb(0, 255, 0);
+            width: 10px;
+        }
+
+        #two {
+            background-color: rgb(255, 123, 0);
+            width: 10px;
+        }
+
+        #one {
+            background-color: rgb(255, 0, 0);
+            width: 10px;
+        }
+
+        #wishlist {
+            background-color: rgb(0, 0, 255);
+            width: 10px;
+        }
+    </style>
+</head>
+<body>
+<div id="user">
+    <div id="heading">
+        <h1 style="font-size: 30px; color: white;">Personal Account</h1>
+    </div>
+    <div id="search">
+        <form id="search-form" method="POST" action="{{ url_for('your_route') }}">
+            <input type="text" name="search1" placeholder="Search for the book...">
+            <button type="submit">Search</button>
+        </form>
+    </div>
+    <table>
+        <tr>
+            <td id="five" class="dropzone">
+                5 Star
+            </td>
+            <td>
+                Excellent
+            </td>
+        </tr>
+        <tr>
+            <td id="four" class="dropzone">
+                4 Star
+            </td>
+            <td>
+                Very Good
+            </td>
+        </tr>
+        <tr>
+            <td id="three" class="dropzone">
+                3 Star
+            </td>
+            <td>
+                Average
+            </td>
+        </tr>
+        <tr>
+            <td id="two" class="dropzone">
+                2 Star
+            </td>
+            <td>
+                Bad
+            </td>
+        </tr>
+        <tr>
+            <td id="one" class="dropzone">
+                1 Star
+            </td>
+            <td>
+                Terrible
+            </td>
+        </tr>
+        <tr>
+            <td id="wishlist" class="dropzone">
+                Wishlist
+            </td>
+            <td>
+                May read in the future
+            </td>
+        </tr>
+    </table>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const searchForm = document.getElementById('search-form');
+        const dropzones = document.getElementsByClassName('dropzone');
+
+        searchForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const searchInput = document.querySelector('input[type="text"]');
+            const searchQuery = searchInput.value;
+
+            const bookImage = document.createElement('img');
+            bookImage.src = '';
+            bookImage.draggable = true;
+
+            const dropzone = dropzones[0];
+            dropzone.innerHTML = '';
+            dropzone.appendChild(bookImage);
+
+            searchInput.value = '';
+        });
+
+        for (const dropzone of dropzones) {
+            dropzone.addEventListener('dragover', function (event) {
+                event.preventDefault();
+            });
+
+            dropzone.addEventListener('drop', function (event) {
+                event.preventDefault();
+
+                const draggedBookImage = event.dataTransfer.getData('text/html');
+
+                dropzone.innerHTML = draggedBookImage;
+            });
+        }
+    });
+</script>
+
+{% for book in books %}
+    {{ book['imgpath'] }}
+    <img src="{{ book.imgpath }}" draggable="true" alt="{{ book.booktitle }}">
+{% endfor %}
+</body>
+</html>
